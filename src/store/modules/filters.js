@@ -1,7 +1,7 @@
 export default {
   state: {
-    timeValue: "",
-    sortByValue: "",
+    time: "",
+    sortBy: "",
     timeOptions: [
       { label: "Today" },
       { label: "This week" },
@@ -13,8 +13,8 @@ export default {
     ]
   },
   getters: {
-    getTimeValue: state => state.timeValue,
-    getSortByValue: state => state.sortByValue,
+    getTime: state => state.time,
+    getSortBy: state => state.sortBy,
     getTimeOptions: state => state.timeOptions,
     getSortByOptions: state => state.sortByOptions
   },
@@ -35,11 +35,11 @@ export default {
       const thisMonth = date.toISOString().slice(0, 10);
       state.timeOptions[2].value = thisMonth;
     },
-    UPDATE_TIME_VALUE(state, value) {
-      state.timeValue = value;
+    UPDATE_TIME_VALUE(state, time) {
+      state.time = time;
     },
-    UPDATE_SORT_BY_VALUE(state, value) {
-      state.sortByValue = value;
+    UPDATE_SORT_BY_VALUE(state, sortBy) {
+      state.sortBy = sortBy;
     }
   }
 };

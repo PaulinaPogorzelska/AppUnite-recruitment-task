@@ -14,7 +14,7 @@ export default {
       state.sources = sourcesList.join(",");
     },
     SET_NEWS(state, news) {
-      news.forEach(news => state.news.push(news));
+      state.news = news;
     }
   },
   actions: {
@@ -30,13 +30,14 @@ export default {
       dispatch("fetchNews");
     },
     async fetchNews({ rootState, commit }) {
+      console.log(rootState.filters.time ? rootState.filters.time.value : "");
       const response = await axios.get("http://newsapi.org/v2/everything", {
         params: {
           apiKey: process.env.VUE_APP_API_KEY,
           language: "en",
           sources: rootState.news.sources,
-          from: rootState.filters.timeValue,
-          sortBy: rootState.filters.sortByValue
+          from: rootState.filters.time ? rootState.filters.time.value : "", //to avoid errors when filter is empty(multiselect by default return object)
+          sortBy: rootState.filters.sortBy ? rootState.filters.sortBy.value : ""
         }
       });
       commit("SET_NEWS", response.data.articles);

@@ -2,20 +2,24 @@
   <div>
     <multiselect
       placeholder="Pick action"
-      :value="getTimeValue"
+      :value="getTime"
       :options="getTimeOptions"
       :searchable="false"
       label="label"
       @input="UPDATE_TIME_VALUE"
+      @close="updateNews"
     ></multiselect>
     <multiselect
       placeholder="Pick action"
-      :value="getSortByValue"
+      :value="getSortBy"
       :options="getSortByOptions"
       :searchable="false"
       label="label"
       @input="UPDATE_SORT_BY_VALUE"
+      @close="updateNews"
     ></multiselect>
+    <p>{{ getTime }}</p>
+    <p>{{ getSortBy }}</p>
   </div>
 </template>
 
@@ -30,14 +34,17 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getTimeValue",
-      "getSortByValue",
+      "getTime",
+      "getSortBy",
       "getTimeOptions",
       "getSortByOptions"
     ])
   },
   methods: {
-    ...mapMutations(["UPDATE_TIME_VALUE", "UPDATE_SORT_BY_VALUE"])
+    ...mapMutations(["UPDATE_TIME_VALUE", "UPDATE_SORT_BY_VALUE"]),
+    updateNews() {
+      this.$store.dispatch("fetchNews");
+    }
   }
 };
 </script>
