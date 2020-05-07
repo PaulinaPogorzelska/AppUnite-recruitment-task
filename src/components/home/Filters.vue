@@ -1,47 +1,43 @@
 <template>
   <div>
     <multiselect
-      v-model="timeValue"
-      :options="timeOptions"
+      placeholder="Pick action"
+      :value="getTimeValue"
+      :options="getTimeOptions"
+      :searchable="false"
       label="label"
+      @input="UPDATE_TIME_VALUE"
     ></multiselect>
-    <multiselect v-model="sortByValue" :options="sortByOptions"></multiselect>
-    <p>{{ timeValue }}</p>
-    <p>{{ sortByValue }}</p>
+    <multiselect
+      placeholder="Pick action"
+      :value="getSortByValue"
+      :options="getSortByOptions"
+      :searchable="false"
+      label="label"
+      @input="UPDATE_SORT_BY_VALUE"
+    ></multiselect>
   </div>
 </template>
 
 <script>
 import Multiselect from "vue-multiselect";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   components: { Multiselect },
-  data() {
-    return {
-      timeValue: "",
-      sortByValue: "",
-      timeOptions: [
-        { label: "Today" },
-        { label: "This week" },
-        { label: "This month" }
-      ],
-      sortByOptions: ["Popularity", "Publication date"]
-    };
-  },
   created() {
-    let date = new Date();
-    const today = date.toISOString().slice(0, 10);
-    this.timeOptions[0].value = today;
-
-    const day = date.getDay();
-    const mondayDate = date.getDate() - day + (day == 0 ? -6 : 1);
-    date.setDate(mondayDate);
-    const thisWeek = date.toISOString().slice(0, 10);
-    this.timeOptions[1].value = thisWeek;
-
-    date = new Date(); //set again because date has been modified
-    date.setDate(1);
-    const thisMonth = date.toISOString().slice(0, 10);
-    this.timeOptions[2].value = thisMonth;
+    this.$store.commit("SET_CURRENT_DATES");
+    this.$store.dispatch("fetchSources");
+  },
+  computed: {
+    ...mapGetters([
+      "getTimeValue",
+      "getSortByValue",
+      "getTimeOptions",
+      "getSortByOptions"
+    ])
+  },
+  methods: {
+    ...mapMutations(["UPDATE_TIME_VALUE", "UPDATE_SORT_BY_VALUE"])
   }
 };
 </script>

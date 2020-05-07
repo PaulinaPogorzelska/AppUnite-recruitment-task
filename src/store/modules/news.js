@@ -29,14 +29,14 @@ export default {
       commit("SET_SOURCES", response.data.sources);
       dispatch("fetchNews");
     },
-    async fetchNews({ state, commit }) {
-      console.log(state.sources);
+    async fetchNews({ rootState, commit }) {
       const response = await axios.get("http://newsapi.org/v2/everything", {
         params: {
           apiKey: process.env.VUE_APP_API_KEY,
-          sortBy: "publishedAt",
           language: "en",
-          sources: state.sources
+          sources: rootState.news.sources,
+          from: rootState.filters.timeValue,
+          sortBy: rootState.filters.sortByValue
         }
       });
       commit("SET_NEWS", response.data.articles);
