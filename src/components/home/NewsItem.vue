@@ -22,7 +22,9 @@ export default {
   methods: {
     loadDetailsPage() {
       const endPoint = this.singleNews.title.replace(/ /g, "-");
-      this.$router.push("/news/" + endPoint);
+      this.$router.push(
+        "/news/" + endPoint + "/" + this.singleNews.publishedAt
+      );
     }
   }
 };
