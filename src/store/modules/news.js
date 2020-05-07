@@ -34,6 +34,7 @@ export default {
       const response = await axios.get("http://newsapi.org/v2/everything", {
         params: {
           apiKey: process.env.VUE_APP_API_KEY,
+          pageSize: 6,
           language: "en",
           sources: rootState.news.sources,
           from: rootState.filters.time ? rootState.filters.time.value : "", //to avoid errors when filter is empty(multiselect by default return object)
