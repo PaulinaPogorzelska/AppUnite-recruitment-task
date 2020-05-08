@@ -2,8 +2,7 @@ import axios from "axios";
 export default {
   state: {
     sources: "",
-    news: [],
-    showMore: false
+    news: []
   },
   getters: {
     getNews: state => state.news
@@ -16,12 +15,6 @@ export default {
     },
     SET_NEWS(state, news) {
       state.news = news;
-    },
-    TURN_ON_SHOW_MORE(state) {
-      state.showMore = true;
-    },
-    TURUN_OFF_SHOW_MORE(state) {
-      state.showMore = false;
     },
     SET_MORE_NEWS(state, news) {
       news.forEach(el => state.news.push(el));
@@ -44,14 +37,15 @@ export default {
       const response = await axios.get("http://newsapi.org/v2/everything", {
         params: {
           apiKey: process.env.VUE_APP_API_KEY,
-          pageSize: 6,
           language: "en",
+          pageSize: 6,
+          page: rootState.pagination.currentPage,
           sources: rootState.news.sources,
           from: rootState.filters.time ? rootState.filters.time.value : "", //to avoid errors when filter is empty(multiselect by default return object)
           sortBy: rootState.filters.sortBy ? rootState.filters.sortBy.value : ""
         }
       });
-      if (rootState.news.showMore) {
+      if (rootState.pagination.showMore) {
         commit("SET_MORE_NEWS", response.data.articles);
       } else {
         commit("SET_NEWS", response.data.articles);

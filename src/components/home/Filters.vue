@@ -43,6 +43,7 @@ export default {
   methods: {
     ...mapMutations(["UPDATE_TIME_VALUE", "UPDATE_SORT_BY_VALUE"]),
     updateNews() {
+      this.$store.commit("RESET_PAGE_NUMBER");
       this.$store.commit("TURUN_OFF_SHOW_MORE");
       this.$store.dispatch("fetchNews");
     }
