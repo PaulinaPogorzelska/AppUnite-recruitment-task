@@ -2,7 +2,8 @@ import axios from "axios";
 export default {
   state: {
     sources: "",
-    news: []
+    news: [],
+    showMore: false
   },
   getters: {
     getNews: state => state.news
@@ -15,6 +16,15 @@ export default {
     },
     SET_NEWS(state, news) {
       state.news = news;
+    },
+    TURN_ON_SHOW_MORE(state) {
+      state.showMore = true;
+    },
+    TURUN_OFF_SHOW_MORE(state) {
+      state.showMore = false;
+    },
+    SET_MORE_NEWS(state, news) {
+      news.forEach(el => state.news.push(el));
     }
   },
   actions: {
@@ -41,7 +51,11 @@ export default {
           sortBy: rootState.filters.sortBy ? rootState.filters.sortBy.value : ""
         }
       });
-      commit("SET_NEWS", response.data.articles);
+      if (rootState.news.showMore) {
+        commit("SET_MORE_NEWS", response.data.articles);
+      } else {
+        commit("SET_NEWS", response.data.articles);
+      }
     }
   }
 };
