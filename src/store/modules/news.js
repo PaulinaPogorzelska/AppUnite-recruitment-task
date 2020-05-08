@@ -2,10 +2,12 @@ import axios from "axios";
 export default {
   state: {
     sources: "",
-    news: []
+    news: [],
+    resultsNumber: ""
   },
   getters: {
-    getNews: state => state.news
+    getNews: state => state.news,
+    getResultsNumber: state => state.resultsNumber
   },
   mutations: {
     SET_SOURCES(state, sources) {
@@ -18,6 +20,9 @@ export default {
     },
     SET_MORE_NEWS(state, news) {
       news.forEach(el => state.news.push(el));
+    },
+    SET_MAX_RESULTS_NUMBER(state, maxResNum) {
+      state.resultsNumber = maxResNum;
     }
   },
   actions: {
@@ -33,12 +38,11 @@ export default {
       dispatch("fetchNews");
     },
     async fetchNews({ rootState, commit }) {
-      console.log(rootState.filters.time ? rootState.filters.time.value : "");
       const response = await axios.get("http://newsapi.org/v2/everything", {
         params: {
           apiKey: process.env.VUE_APP_API_KEY,
           language: "en",
-          pageSize: 6,
+          pageSize: rootState.pagination.pageSize,
           page: rootState.pagination.currentPage,
           sources: rootState.news.sources,
           from: rootState.filters.time ? rootState.filters.time.value : "", //to avoid errors when filter is empty(multiselect by default return object)
@@ -50,6 +54,7 @@ export default {
       } else {
         commit("SET_NEWS", response.data.articles);
       }
+      commit("SET_MAX_RESULTS_NUMBER", response.data.totalResults);
     }
   }
 };
