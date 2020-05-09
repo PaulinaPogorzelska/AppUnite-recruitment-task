@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="singleNews.urlToImage" />
+    <img :src="setImage" />
     <p>{{ date }}</p>
     <p>{{ singleNews.author }}</p>
     <a :href="singleNews.url" target="_blank">{{ singleNews.source.name }}</a>
@@ -17,6 +17,13 @@ export default {
     date() {
       const date = new Date(this.singleNews.publishedAt).toString();
       return date.slice(4, 10) + "," + date.slice(10, 15);
+    },
+    setImage() {
+      if (this.singleNews.urlToImage) {
+        return this.singleNews.urlToImage;
+      } else {
+        return require("../../assets/placeholder 16x9.png");
+      }
     }
   },
   methods: {

@@ -2,7 +2,7 @@
   <div>
     <p @click="$router.push('/')">Return to articles list</p>
     <p>{{ this.$route.params }}</p>
-    <img :src="getNewsDetails.urlToImage" />
+    <img :src="setImage" />
     <p>{{ date }}</p>
     <p>{{ getNewsDetails.author }}</p>
     <a :href="getNewsDetails.url">{{ source }}</a>
@@ -32,6 +32,13 @@ export default {
         return this.getNewsDetails.source.name;
       } else {
         return "";
+      }
+    },
+    setImage() {
+      if (this.getNewsDetails.urlToImage) {
+        return this.getNewsDetails.urlToImage;
+      } else {
+        return require("../../assets/placeholder 5x2.png");
       }
     }
   }

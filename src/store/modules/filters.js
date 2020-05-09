@@ -40,6 +40,10 @@ export default {
     },
     UPDATE_SORT_BY_VALUE(state, sortBy) {
       state.sortBy = sortBy;
+    },
+    CLEAR_FILTERS(state) {
+      state.time = "";
+      state.sortBy = "";
     }
   }
 };

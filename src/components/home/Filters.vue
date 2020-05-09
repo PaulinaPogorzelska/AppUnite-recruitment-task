@@ -18,6 +18,7 @@
       @input="UPDATE_SORT_BY_VALUE"
       @close="updateNews"
     ></multiselect>
+    <button @click="clearFilters">Clear Filters</button>
     <p>{{ getTime }}</p>
     <p>{{ getSortBy }}</p>
   </div>
@@ -46,6 +47,9 @@ export default {
       this.$store.commit("RESET_PAGE_NUMBER");
       this.$store.commit("TURUN_OFF_SHOW_MORE");
       this.$store.dispatch("fetchNews");
+    },
+    clearFilters() {
+      this.$store.commit("CLEAR_FILTERS");
     }
   }
 };
