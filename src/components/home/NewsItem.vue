@@ -1,6 +1,6 @@
 <template>
   <div class="newsItem">
-    <img :src="setImage" />
+    <div class="wrapImage"><img :src="setImage" /></div>
     <div class="infoLine">
       <p>{{ date }}</p>
       <p>{{ singleNews.author }}</p>
@@ -21,7 +21,7 @@ export default {
       return date.slice(4, 10) + "," + date.slice(10, 15);
     },
     setImage() {
-      if (this.singleNews.urlToImage) {
+      if (this.singleNews.urlToImage && this.singleNews.urlToImage != "null") {
         return this.singleNews.urlToImage;
       } else {
         return require("../../assets/placeholder 16x9.png");
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .newsItem {
   position: relative;
 }
@@ -80,7 +80,6 @@ export default {
   bottom: 0;
   width: 100%;
   height: 50px;
-  box-sizing: border-box;
   background: #493be1;
   border: 1px solid #493be1;
   text-align: center;

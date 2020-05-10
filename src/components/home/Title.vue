@@ -2,7 +2,7 @@
   <h1>Articles</h1>
 </template>
 
-<style scoped>
+<style>
 h1 {
   font-size: 32px;
   color: #465252;
