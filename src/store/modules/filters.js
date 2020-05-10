@@ -34,6 +34,8 @@ export default {
       date.setDate(1);
       const thisMonth = date.toISOString().slice(0, 10);
       state.timeOptions[2].value = thisMonth;
+
+      state.sortBy = state.sortByOptions[1];
     },
     UPDATE_TIME_VALUE(state, time) {
       state.time = time;

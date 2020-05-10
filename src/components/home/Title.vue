@@ -7,6 +7,6 @@ h1 {
   font-size: 32px;
   color: #465252;
   font-weight: normal;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 </style>

@@ -12,7 +12,7 @@ export default {
   mutations: {
     SET_SOURCES(state, sources) {
       const sourcesList = [];
-      sources.slice(0, 20).forEach(source => sourcesList.push(source.id));
+      sources.slice(1, 20).forEach(source => sourcesList.push(source.id));
       state.sources = sourcesList.join(",");
     },
     SET_NEWS(state, news) {
@@ -41,12 +41,13 @@ export default {
       const response = await axios.get("http://newsapi.org/v2/everything", {
         params: {
           apiKey: process.env.VUE_APP_API_KEY,
-          language: "en",
-          pageSize: rootState.pagination.pageSize,
-          page: rootState.pagination.currentPage,
-          sources: rootState.news.sources,
           from: rootState.filters.time ? rootState.filters.time.value : "", //to avoid errors when filter is empty(multiselect by default return object)
-          sortBy: rootState.filters.sortBy ? rootState.filters.sortBy.value : ""
+          sortBy: rootState.filters.sortBy
+            ? rootState.filters.sortBy.value
+            : "",
+          sources: rootState.news.sources,
+          pageSize: rootState.pagination.pageSize,
+          page: rootState.pagination.currentPage
         }
       });
       if (rootState.pagination.showMore) {

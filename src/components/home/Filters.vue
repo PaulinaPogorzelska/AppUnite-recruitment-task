@@ -60,6 +60,9 @@ export default {
     },
     clearFilters() {
       this.$store.commit("CLEAR_FILTERS");
+      this.$store.commit("TURUN_OFF_SHOW_MORE");
+      this.$store.commit("RESET_PAGE_NUMBER");
+      this.$store.dispatch("fetchSources");
     }
   }
 };
