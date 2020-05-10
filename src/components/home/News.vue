@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="newsList">
     <NewsItem
       v-for="(singleNews, key) in getNews"
       :key="key"
@@ -20,3 +20,18 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.newsList {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  column-gap: 5%;
+  row-gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .newsList {
+    grid-template-columns: 45% 45%;
+  }
+}
+</style>

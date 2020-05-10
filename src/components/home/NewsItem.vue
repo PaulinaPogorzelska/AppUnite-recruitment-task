@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="newsItem">
     <img :src="setImage" />
-    <p>{{ date }}</p>
-    <p>{{ singleNews.author }}</p>
-    <a :href="singleNews.url" target="_blank">{{ singleNews.source.name }}</a>
-    <p>{{ singleNews.title }}</p>
+    <div class="infoLine">
+      <p>{{ date }}</p>
+      <p>{{ singleNews.author }}</p>
+      <a :href="singleNews.url" target="_blank">{{ singleNews.source.name }}</a>
+    </div>
+    <h2>{{ singleNews.title }}</h2>
     <p>{{ singleNews.description }}</p>
     <button @click="loadDetailsPage">Read More</button>
   </div>
@@ -36,3 +38,53 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.newsItem {
+  position: relative;
+}
+
+.newsItem img {
+  width: 100%;
+}
+
+.infoLine * {
+  display: inline-block;
+  margin: 10px 10px 5px 0;
+  font-size: 14px;
+}
+
+.infoLine p {
+  color: #606060;
+}
+
+.infoLine a {
+  text-decoration: none;
+  color: #493be1;
+}
+
+.newsItem h2 {
+  font-size: 24px;
+  margin: 5px 10px 10px 0;
+}
+
+.newsItem > p {
+  font-size: 17px;
+  color: #465252;
+  line-height: 19px;
+  margin-bottom: 60px;
+}
+
+.newsItem button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  background: #493be1;
+  border: 1px solid #493be1;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+}
+</style>

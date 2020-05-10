@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <button @click="showMore" :disabled="isDisabled()">Show more</button>
-    <p>
-      {{ getCurrentPage }} ,
-      {{ this.getCurrentPage > 100 / this.getPageSize }} ,
-      {{ getPageSize }}
-    </p>
+  <div class="wrapShowMore">
+    <button @click="showMore" :disabled="isDisabled()" class="showMore">
+      Show more
+    </button>
   </div>
 </template>
 
@@ -31,3 +28,19 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.wrapShowMore {
+  display: flex;
+  justify-content: center;
+}
+.showMore {
+  margin-top: 70px;
+  width: 28%;
+  padding: 13px;
+  background-color: white;
+  font-size: 16px;
+  color: #493be1;
+  border: 1px solid #493be1;
+}
+</style>
