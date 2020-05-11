@@ -47,7 +47,8 @@ export default {
             : "",
           sources: rootState.news.sources,
           pageSize: rootState.pagination.pageSize,
-          page: rootState.pagination.currentPage
+          page: rootState.pagination.currentPage,
+          language: "en"
         }
       });
       if (rootState.pagination.showMore) {
